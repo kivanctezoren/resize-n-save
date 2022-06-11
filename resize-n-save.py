@@ -2,7 +2,8 @@ import os
 import argparse
 import PIL.Image as PILI
 
-# Comply with os.makedirs - do not use parent dir. (..) in paths
+
+# Comply with os.makedirs - should not use parent dir. (..) in paths
 ap = argparse.ArgumentParser()
 ap.add_argument("in_dir")  # e.g. "inat18/"
 ap.add_argument("out_dir")  # e.g. "out/"
@@ -21,7 +22,7 @@ for dirpath, dirnames, filenames in os.walk(in_dir):
         resized_img = PILI.open(img_path).resize((new_size, new_size), PILI.ANTIALIAS).convert("RGB")
         
         # Ensure jpg output
-        # TODO: Does not consider formats other than jpg. Needs better filename detection
+        # TODO: Does not consider formats other than png. Needs better filename detection
         if img_name.endswith(".png"):
             resized_img_name = img_name[:-3] + "jpg"
         else:
