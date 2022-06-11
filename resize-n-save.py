@@ -18,12 +18,20 @@ for dirpath, dirnames, filenames in os.walk(in_dir):
     for img_name in filenames:
         # Skips empty directories
         img_path = dirpath + "/" + img_name
-        resized_img = PILI.open(img_path)
-
-        save_dir = out_dir + dirpath[len(in_dir):]
+        resized_img = PILI.open(img_path).resize((new_size, new_size), PILI.ANTIALIAS)
         
+        # Ensure png output
+        # TODO Does not consider formats other than jpg. Needs better filename detection
+        if img_name.endswith(".jpeg"):
+            resized_img_name = img_name[:-4] + "png"
+        elif img_name.endswith(".jpg"):
+            resized_img_name = img_name[:-3] + "png"
+        else:
+            resized_img_name = img_name
+        
+        save_dir = out_dir + dirpath[len(in_dir):] + resized_img_name
         os.makedirs(save_dir, exist_ok=True)
         
-        # TODO: Should save in JPEG format
+        resized_img.save(save_dir)
         
-        print("Saved image:", save_dir + resized_img)
+        print("Saved image:", save_dir)
