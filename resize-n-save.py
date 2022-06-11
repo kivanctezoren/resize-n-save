@@ -25,6 +25,8 @@ for dirpath, dirnames, filenames in os.walk(in_dir):
         # TODO: Does not consider formats other than png. Needs better filename detection
         if img_name.endswith(".png"):
             resized_img_name = img_name[:-3] + "jpg"
+        elif img_name.endswith(".jpeg"):
+            resized_img_name = img_name[:-4] + "jpg"
         else:
             resized_img_name = img_name
         
