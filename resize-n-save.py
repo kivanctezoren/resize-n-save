@@ -3,7 +3,7 @@ import argparse
 import PIL.Image as PILI
 
 
-# Comply with os.makedirs - should not use parent dir. (..) in paths
+# Comply with os.makedirs - should not use parent dir. (..) in out_dir
 ap = argparse.ArgumentParser()
 ap.add_argument("in_dir")  # e.g. "inat18/"
 ap.add_argument("out_dir")  # e.g. "out/"
